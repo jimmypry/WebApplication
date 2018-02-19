@@ -1,0 +1,13 @@
+
+<div *ngIf="result && result.length != 0">
+	<a routerLink="/edit/{{post.postid}}" class="btn">Edit</a>
+	<div>Title</div>
+	<div [innerHTML]="result[0]"></div>
+	<div>Body</div>
+	<div [innerHTML]="result[1]"></div>
+</div>
+<div *ngIf="!result">
+	<div>
+		<strong>No Such Blog</strong>
+	</div>
+</div>
