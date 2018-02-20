@@ -3,22 +3,28 @@
 
 <div *ngIf="post">
 <h2>{{ post.title }} Details</h2>
-<div class="form-group">
-    <label>title:
-      <input [(ngModel)]="post.title" class="form-control" placeholder="title">
-    </label>
- </div>
-<div class="form-group">
-    <label>text:
-    	<textarea [(ngModel)]="post.body"  class="form-control" cols="30" rows="10"></textarea>
-    </label>
-</div>
+
+<form [formGroup]="postGroup" novalidate>
+	<div class="form-group">
+	    <label>title:
+	      <input [(ngModel)]="post.title"  class="form-control" formControlName="title" placeholder="title">
+	    </label>
+	</div>
+	<div class="form-group">
+	    <label>text:
+	    	<textarea [(ngModel)]="post.body"   class="form-control" formControlName="body" cols="30" rows="10"></textarea>
+	    </label>
+	</div>
+</form>
+
+
 <div><span>Last Modified: </span>{{post.modified}}</div>
 
+
 <div>
-<button class="btn btn-success" (click)="save()">save</button>
-<button class="btn btn-danger" (click)="dele()">delete</button>
-<button class="btn btn-primary" (click)="preview()">preview</button>
+	<button class="btn btn-success" (click)="save()" [disabled]="postGroup.pristine">save</button>
+	<button class="btn btn-danger" (click)="dele()">delete</button>
+	<button class="btn btn-primary" (click)="preview()">preview</button>
 </div>
 <!-- </div>
 <button (click)="preview()">preview!!</button>

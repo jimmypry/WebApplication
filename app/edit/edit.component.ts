@@ -19,35 +19,53 @@ import { Post, BlogService } from '../blog.service';
 
 export class EditComponent implements OnInit {
 
+
+    @HostListener('window:beforeunload', ['$event'])
+    beforeunloadHandler(event) {
+        this.autosave();
+    }
+
+
   	post: Post;
+    postGroup = new FormGroup({
+      title : new FormControl,
+      body : new FormControl 
+    });
 
 
   	constructor(private blogService: BlogService, 
   				private router: Router, 
   				private route: ActivatedRoute
-  				) {}
+  				) {
+    }
 
-  	ngOnInit():void {
-  		this.route.paramMap.subscribe(() => this.post = this.getPost());
-  	}
 
-  	@HostListener('window:beforeunload', ['$event'])
-		beforeunloadHandler(event) {
-    		this.autosave();
-		}
+    ngOnInit():void {
+      this.route.paramMap.subscribe(() => this.post = this.getPost());
+
+
+      console.log('refresh!');
+
+    }
 
    	autosave():void{
   		this.blogService.updatePost(this.post);
+      this.postGroup.markAsPristine();
+
   	}
+
 
 
   	getPost():Post{
   		const id = +this.route.snapshot.paramMap.get('id');
+      this.postGroup.markAsPristine();
   		return this.blogService.getPost(id);
+
   	}
 
   	save():void{
   		this.blogService.updatePost(this.post);
+      this.postGroup.markAsPristine();
   	}
 
    	dele():void{

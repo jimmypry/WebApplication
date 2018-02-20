@@ -7,7 +7,7 @@
 <ul class="posts">
   <li *ngFor="let post of posts">
     	<a routerLink="/edit/{{post.postid}}">
-    	<span  class="badge badge-info">{{post.modified}} </span> {{post.title}}  
+    	<span  class="badge badge-success">{{post.modified}} </span> <span class="ti">{{post.title}}  </span>
     </a>
   </li>
 </ul>

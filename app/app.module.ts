@@ -24,7 +24,8 @@ import { PreviewComponent } from './preview/preview.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [BlogService],
   bootstrap: [AppComponent]
